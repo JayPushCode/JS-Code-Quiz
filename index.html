@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Coding Quiz</title>
+    <link rel="stylesheet" href="Assets/style.css">
+</head>
+<body>
+    <header class="HeaderElements">
+        <button id="ScoresBttn"> Highscores </button>
+        <div class="HeaderTitle"> JavaScript Coding Quiz</div> 
+        <div id="legend">
+            <div id="Timer"> Time Remaining: <span id="RunningTimer" class="running"> </span></div>
+            <div id="Score"> Score: <span id="RunningScore" class="running"> </span></div>
+        </div>
+    </header>
+
+    <section class="GameArea">
+        <card id="board">
+            <div id="MultipleChoice" class="QuizBox" class="InnerBox">
+             <div id="Question" class="hide"> What is the square root of a number? </div>
+                <div id="Answers" class="hide">
+                    <button class="Choices" id="C1"> I really don't know </button>
+                    <button class="Choices" id="C2"> I mean it might not even exist </button>
+                    <button class="Choices" id="C3"> I mean can you really give value to a number? </button>
+                    <button class="Choices" id="C4"> Whatever the calculator says </button>
+                </div>
+                <div id="controls">
+                    <button  class= "hide" id="GameButton"> Next </button>
+                    <button id="StartGame"> Start </button>
+                </div>
+            </div>
+        </card>
+    </section>
+
+</body>
+<script src="Assets/script.js"></script>
+</html>
