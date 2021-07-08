@@ -6,7 +6,7 @@ This website displays a JavaScript quiz that asks the user questions that are th
 
 Below is a screenshot of the website:
 
-![screenshot](.Assets/screenshot.png)
+![screenshot](./Assets/screenshot.png)
 
 ## Link to Deployable Code
 
