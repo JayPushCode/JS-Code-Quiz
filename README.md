@@ -10,4 +10,4 @@ Below is a screenshot of the website:
 
 ## Link to Deployable Code
 
-https://jaypushcode.github.io/PasswordGenerator/
+https://jaypushcode.github.io/JS-Code-Quiz/
