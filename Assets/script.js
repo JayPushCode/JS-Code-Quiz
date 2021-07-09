@@ -27,7 +27,7 @@ function startTimer() {
       timerCount--;
       timerElement.textContent = timerCount;
   
-      // Tests if time has run out
+      // Clear Interval
       if (timerCount === 0) {
         // Clears interval
         clearInterval(timer);
@@ -47,19 +47,20 @@ function startTimer() {
  stButton.addEventListener('click', startTimer)
  gameButton.addEventListener('click', () =>{
      currentQuestionIndex++
-         // call the next question
+         // Call the next question in array
      setNextQuestion()
  })
  
  
-     // function to start the game, hide the play button, then show the question & choices also start timer.
+     // Function to start the game, hide the play button, then show the question & choices also start timer.
  function stGame() {
-     // hides play button after pressing
+
+     // Hide play button
      stButton.classList.add('hide');
-     // set a way to shuffle questions. randomizes array
+     // Shuffle questions & Randomizes array
      shuffledQuestions = questionBank.sort(() => Math.random() - .5)
      currentQuestionIndex = 0
-     // reveal questions
+     // Removes "hide" class to reveal quiz
      questionEl.classList.remove('hide')
      answersEl.classList.remove('hide')
 
@@ -67,21 +68,21 @@ function startTimer() {
  }
  
  function setNextQuestion() {
-             // clears old and resets it
+             // Clears old questions and answers and resets it
      resetState()
-             // shows new question
+             // Shows next question & resets Score*
      showQuestion(shuffledQuestions[currentQuestionIndex])
      renderScore()
  }
  
  function showQuestion(question) {
      questionEl.innerText = question.question
-     question.answers.forEach(answer =>{
+     question.answers.forEach(answers =>{
          const button = document.createElement('button')
-         button.innerText = answer.text
+         button.innerText = answers.text
          button.classList.add('btn')
-         if (answer.correct) {
-             button.dataset.correct = answer.correct
+         if (answers.correct) {
+             button.dataset.correct = answers.correct;
          }
          button.addEventListener('click', selectAnswer)
          answersEl.appendChild(button)
@@ -89,9 +90,9 @@ function startTimer() {
  }
  
  function resetState() {
-     // hide next button after answering
+     // Hides next button after answering previous question
    gameButton.classList.add('hide')
-     // clearing old blank choices 
+     // Clears old answer choices 
    while (answersEl.firstChild) {
        answersEl.removeChild
        (answersEl.firstChild)
@@ -102,26 +103,26 @@ function startTimer() {
  function selectAnswer(e) {
      const selectedButton = e.target
      const correct = selectedButton.dataset.correct
+
      
+    // Come Back to later; Trying to figure out how to keep score per question and update high score*
+     if (correct === true) {
+         score += 100;
+         renderScore();
+     } else {timerCount -= 20}
+    
  
-     // If on the last question restart
+     // Restarts game if on last array index
      if(shuffledQuestions.length > currentQuestionIndex +1){
          gameButton.classList.remove('hide')
      }else {
          stButton.innerText = 'Restart'
          stButton.classList.remove('hide')
+         gameButton.classList.remove('hide')
  
      }
  
  
-     // keep up with the current score
-     if(questionBank.correct===true){
-         score =+ 100;
-         renderScore();
-
- 
-     }
-     
  
      // reveals next button
      gameButton.classList.remove('hide')
@@ -130,7 +131,7 @@ function startTimer() {
  
  
  hsButton.addEventListener('click', function() {
-     console.log("Checking Your High Score are ye?")
+     console.log("Checking Your High Score are ye? Come back later to link to Local Storage")
  })
 
 
