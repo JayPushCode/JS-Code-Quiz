@@ -81,8 +81,10 @@ function startTimer() {
          const button = document.createElement('button')
          button.innerText = answers.text
          button.classList.add('btn')
-         if (answers.correct) {
-             button.dataset.correct = answers.correct;
+         if (answers.correct == true) {
+             button.setAttribute("Correct", true);
+         } else {
+            button.setAttribute("Correct", false);
          }
          button.addEventListener('click', selectAnswer)
          answersEl.appendChild(button)
@@ -100,16 +102,22 @@ function startTimer() {
  }
  
  
- function selectAnswer(e) {
-     const selectedButton = e.target
-     const correct = selectedButton.dataset.correct
+//  function selectAnswer(e) {
+//      const selectedButton = e.target
+//      const correct = selectedButton.dataset.correct
 
+function selectAnswer(e) {
+    const selectedButton = e.target
+    var checkerStat = selectedButton.getAttribute("Correct")
+    
      
     // Come Back to later; Trying to figure out how to keep score per question and update high score*
-     if (correct === true) {
+     if (checkerStat == true) {
          score += 100;
          renderScore();
-     } else {timerCount -= 20}
+         
+     } else {
+         timerCount -= 20}
     
  
      // Restarts game if on last array index
@@ -197,3 +205,5 @@ var questionBank = [
             {text: 'console.log', correct: true},
         ]
     }];
+
+    
