@@ -6,8 +6,12 @@ This website displays a JavaScript quiz that asks the user questions that are th
 
 Below is a screenshot of the website:
 
-![screenshot](.Assets/screenshot.png)
+![screenshot](./Assets/screenshot.png)
 
 ## Link to Deployable Code
 
+<<<<<<< HEAD
 https://jaypushcode.github.io/JS-Code-Quiz/
+=======
+https://jaypushcode.github.io/JS-Code-Quiz/
+>>>>>>> 762ede129538109f1be71e46cd6c69b85979c9d7
