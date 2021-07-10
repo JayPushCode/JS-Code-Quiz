@@ -14,6 +14,7 @@ var stButton = document.getElementById('StartGame')
 // Questions and Answers
 var questionEl = document.getElementById('Question')
 var answersEl = document.getElementById('Answers')
+var gameOverEl = document.getElementById('GameOver')
 
 var shuffledQuestions, currentQuestionIndex;
 
@@ -23,14 +24,18 @@ scoreEl.textContent = score;
 // Game Timer Function (Starts at 100 Seconds)
 function startTimer() {
     // Sets timer
+    timerCount = 100;
     timer = setInterval(function() {
       timerCount--;
       timerElement.textContent = timerCount;
   
-      // Clear Interval
-      if (timerCount === 0) {
+      // Clear Interval when Timer hits 0, or less than 0 and makes timer 0
+      if (timerCount === 0 || timerCount < 0) {
         // Clears interval
         clearInterval(timer);
+        timerCount = 0;
+        timerElement.textContent = timerCount;
+        endGame();
       }
     }, 1000);
   }
@@ -41,6 +46,11 @@ function startTimer() {
         scoreEl.textContent = score;
      }
 
+// Function to clear score on game reset
+
+  function clearScore() {
+      score = 0;
+  }
 // Starting the Game & Timer
 
  stButton.addEventListener('click', stGame)
@@ -55,6 +65,7 @@ function startTimer() {
      // Function to start the game, hide the play button, then show the question & choices also start timer.
  function stGame() {
 
+    clearScore();
      // Hide play button
      stButton.classList.add('hide');
      // Shuffle questions & Randomizes array
@@ -64,6 +75,7 @@ function startTimer() {
      questionEl.classList.remove('hide')
      answersEl.classList.remove('hide')
 
+     gameOverEl.classList.add('hide')
      setNextQuestion()
  }
  
@@ -108,35 +120,51 @@ function startTimer() {
 
 function selectAnswer(e) {
     const selectedButton = e.target
-    var checkerStat = selectedButton.getAttribute("Correct")
+
+    // Solution for converting checkerStat from "striing" to boolean || Realize now I could've also fixed if statement to = "true" instead of true
+    var checkerStat = JSON.parse(selectedButton.getAttribute("Correct"));
     
-     
+     function updateScore() {
     // Come Back to later; Trying to figure out how to keep score per question and update high score*
-     if (checkerStat == true) {
+     if (checkerStat === true) {
          score += 100;
          renderScore();
-         
+
+         // Timer removes 20 seconds on ever button press of wrong answer instead of just once. (So does correct answer; wrap in funciton)
      } else {
          timerCount -= 20}
-    
- 
+     }
+     
+     updateScore ();
+
      // Restarts game if on last array index
      if(shuffledQuestions.length > currentQuestionIndex +1){
          gameButton.classList.remove('hide')
+
      }else {
-         stButton.innerText = 'Restart'
-         stButton.classList.remove('hide')
-         gameButton.classList.remove('hide')
- 
+        endGame();
      }
- 
- 
- 
-     // reveals next button
-     gameButton.classList.remove('hide')
+
  }
  
- 
+ // Function to "End the Game," Bring up name input field and add High Score to localStorage
+
+ function endGame () {
+    console.log("The Game Has Now Ended.");
+
+    stButton.innerText = 'Restart'
+    stButton.classList.remove('hide')
+    stButton.addEventListener('click', stGame)
+    stButton.addEventListener('click', startTimer)
+
+    gameOverEl.classList.remove('hide')
+
+    answersEl.classList.add("hide")
+    questionEl.classList.add("hide")
+
+    gameButton.classList.add('hide');
+
+ }
  
  hsButton.addEventListener('click', function() {
      console.log("Checking Your High Score are ye? Come back later to link to Local Storage")

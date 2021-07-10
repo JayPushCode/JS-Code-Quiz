@@ -123,3 +123,11 @@ body {
    
  
 }
+
+#GameOver {
+    font-size: 4em;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    padding-top: 80px;
+}
